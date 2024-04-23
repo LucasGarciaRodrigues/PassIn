@@ -1,26 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 using PassIn.Communication.Responses;
 using PassIn.Exceptions;
-using PassIn.Infrastructure;
+using PassIn.Infrastructure.Repositories;
 
 namespace PassIn.Application.UseCases.Attendees.GetAllByEventId;
 
 public class GetAllAttendeesByEventIdUseCase
 {
-    private readonly PassInDbContext _dbContext;
+    private readonly EventsRepository _eventsRepository;
 
     public GetAllAttendeesByEventIdUseCase()
     {
-        _dbContext = new PassInDbContext();
+        _eventsRepository = new EventsRepository();
     }
     
     public ResponseAllAttendeesJson Execute(Guid eventId)
     {
-        var entity = _dbContext.Events
+        var entity = _eventsRepository
             .Include(ev => ev.Attendees)
             .ThenInclude(attendee => attendee.CheckIn)
             .FirstOrDefault(ev => ev.Id == eventId);
-
+        
         if (entity is null)
         {
             throw new NotFoundException("Um evento com este id não existe.");

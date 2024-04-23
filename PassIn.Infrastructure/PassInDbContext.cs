@@ -11,6 +11,6 @@ public class PassInDbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=C:\\Users\\lucas\\OneDrive\\Documentos\\Workspace\\NLW\\Back\\PassIn\\PassInDb.db");
+        optionsBuilder.UseSqlite("Data Source=C:\\Users\\lucas\\OneDrive\\Documentos\\Workspace\\NLW\\Back\\Csharp\\PassIn\\PassInDb.db");
     }
 }
